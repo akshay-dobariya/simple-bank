@@ -161,7 +161,7 @@ func TestTransferTxDeadlock(t *testing.T) {
 func Test_execTx(t *testing.T) {
 	// this test will test the rollback functionality by using -ve scenario
 	store := NewStore(testDB)
-	err := store.execTx(context.Background(), func(q *Queries) error {
+	err := store.(*SQLStore).execTx(context.Background(), func(q *Queries) error {
 		return fmt.Errorf("test tx error")
 	})
 	require.Error(t, err)
